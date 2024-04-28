@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisalah <louisalah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:10:02 by louisalah         #+#    #+#             */
-/*   Updated: 2024/03/23 08:07:03 by louisalah        ###   ########.fr       */
+/*   Updated: 2024/04/27 02:34:27 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	reverse_rotate(t_stack **a)
 	if (ft_lstsize(*a) >= 2)
 	{
 		temp = ft_lstnew(ft_lstlast(*a)->content);
-		temp->right_index = (*a)->right_index;
+		temp->right_index = (ft_lstlast(*a))->right_index;
 		ft_lstadd_front(a, &temp);
 		*a = ft_lstlast(*a);
 		*a = (*a)->prev;

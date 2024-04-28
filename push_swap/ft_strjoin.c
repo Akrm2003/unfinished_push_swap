@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 18:48:38 by asid-ahm          #+#    #+#             */
-/*   Updated: 2024/04/28 13:58:01 by asid-ahm         ###   ########.fr       */
+/*   Created: 2024/01/03 08:10:52 by asid-ahm          #+#    #+#             */
+/*   Updated: 2024/04/27 22:18:38 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_lstsize(t_stack *lst)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int	count;
+	int		i;
+	size_t	counter;
+	char	*d;
 
-	count = 1;
-	if (lst == NULL)
-		return (0);
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-		count++;
-		// printf("count = %d\n", count);
-	}
-	return (count);
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (strdup(s2));
+	if (!s2)
+		return (strdup(s1));
+	i = -1;
+	counter = (strlen(s1) + strlen(s2));
+	d = (char *)malloc((counter + 1));
+	if (!d)
+		return (NULL);
+	counter = 0;
+	while (s1[++i])
+		d[i] = s1[i];
+	while (s2[counter])
+		d[i++] = s2[counter++];
+	d[i] = '\0';
+	free(s1);
+	s1 = NULL;
+	return (d);
 }

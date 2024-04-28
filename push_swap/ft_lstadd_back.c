@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisalah <louisalah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:23:06 by asid-ahm          #+#    #+#             */
-/*   Updated: 2024/03/10 23:24:26 by louisalah        ###   ########.fr       */
+/*   Updated: 2024/04/28 13:57:46 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_lstadd_back(t_stack **lst, t_stack **new)
+void	ft_lstadd_back(t_stack **lst, t_stack **new1)
 {
-	if (*lst == NULL)
-		*lst = *new;
-	if (*new != NULL && *lst != NULL)
+	if (*new1 != NULL && *lst != NULL)
 	{
-		(*new)->index = ft_lstsize(*lst);
-		(*new)->prev = ft_lstlast(*lst);
-		ft_lstlast(*lst)->next = *new;
+		// printf("here2\n");
+		(*new1)->index = ft_lstsize(*lst);
+		(*new1)->prev = ft_lstlast(*lst);
+		ft_lstlast(*lst)->next = *new1;
+	}
+	if (*lst == NULL)
+	{
+		*lst = *new1;
+		(*lst)->next = NULL;
 	}
 }

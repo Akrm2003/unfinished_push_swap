@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisalah <louisalah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 02:13:15 by louisalah         #+#    #+#             */
-/*   Updated: 2024/03/23 01:50:25 by louisalah        ###   ########.fr       */
+/*   Updated: 2024/03/25 13:30:40 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,21 @@ void    four_algo(t_stack **a, t_stack **b)
     {
         while (find_smallest(*a))
             rotate_a(a);
-        push_a(a, b);
+        push_b(a, b);
         small_sort(a);
-        push_b(b, a);
+        push_a(b, a);
     }
     else
     {
         while (find_smallest(*a))
             reverse_rotate_a(a);
-        push_a(a, b);
-        small_sort(a);
-        push_b(b, a);
-    }
+		if (!is_sorted(*a))
+		{
+        	push_b(a, b);
+        	small_sort(a);
+        	push_a(b, a);
+		}
+	}
 }
 
 void    five_algo(t_stack **a, t_stack **b)
@@ -42,17 +45,30 @@ void    five_algo(t_stack **a, t_stack **b)
     size = ft_lstsize(*a);
     while ((*a)->right_index >= (size - 3))
         rotate_a(a);
-    push_a(a, b);
+    push_b(a, b);
     while ((*a)->right_index >= (size - 3))
         rotate_a(a);
-    push_a(a, b);
+    push_b(a, b);
     if ((*b)->content < (*b)->next->content && (*a)->content > (*b)->next->content)
         swap_ab(a, b);
     small_sort(a);
     if ((*b)->content < (*b)->next->content)
         swap_b(b);
-    push_b(b, a);
-    push_b(b, a);
+    push_a(b, a);
+    push_a(b, a);
+	// while (a)
+	// 	{
+	// 		printf("a[%d] = %d\n",(*a)->right_index, (*a)->content);
+	// 		(*a) = (*a)->next;
+	// 	}
+		// // printf("\n\n\n");
+		// while (b)
+		// {
+		// 	printf("b[%d] = %d\n",(*b)->right_index, (*b)->content);
+		// 	(*b) = (*b)->next;
+		// }
+	// while (b)
+	// 	push_a((*a), b);
 }
 
 void    big_algo(t_stack **a, t_stack **b, t_cheap wa)
@@ -84,7 +100,7 @@ void    big_algo(t_stack **a, t_stack **b, t_cheap wa)
             bind--;
             rotate_b(b);
         }
-		push_a(a, b);
+		push_b(a, b);
     }
     else if (wa.case_number == 2)
     {
@@ -104,7 +120,7 @@ void    big_algo(t_stack **a, t_stack **b, t_cheap wa)
             bind++;
             reverse_rotate_b(b);
         }
-		push_a(a, b);
+		push_b(a, b);
     }
     else if (wa.case_number == 3)
     {
@@ -118,7 +134,7 @@ void    big_algo(t_stack **a, t_stack **b, t_cheap wa)
             bind++;
             reverse_rotate_b(b);
         }
-		push_a(a, b);
+		push_b(a, b);
     }
     else if (wa.case_number == 4)
     {
@@ -127,12 +143,12 @@ void    big_algo(t_stack **a, t_stack **b, t_cheap wa)
             bind--;
             rotate_b(b);
         }
-        while (aind < bsize)
+        while (aind < asize)
         {
             aind++;
             reverse_rotate_a(a);
         }
-		push_a(a, b);
+		push_b(a, b);
     }
 	// if ((*b)->content > (*b)->next->content)
 	// 	rotate_b(b);

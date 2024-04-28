@@ -3,43 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisalah <louisalah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:37 by asid-ahm          #+#    #+#             */
-/*   Updated: 2024/03/11 00:34:12 by louisalah        ###   ########.fr       */
+/*   Updated: 2024/04/28 14:24:23 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	result(const char *str, size_t i, size_t x, int n, t_stack **a)
+static	long	result(const char *str, size_t i, int n)
 {
 	unsigned long long	k;
-	unsigned long long	tmp;
 
-	tmp = 0;
 	k = 0;
-	while (str[i] >= '0' && str[i] <= '9' && str[i] && k < 2147483647)
-	{
-		tmp = k;
+	while (str[i] >= '0' && str[i] <= 57 && str[i] && k < 2147483647)
 		k = k * 10 + str[i++] - '0';
-		if (k < tmp || ((i - x) > 19))
-		{
-			if (n == 1)
-				return (-1);
-			return (0);
-		}
-	}
-	if ((k > 2147483647 && n == 1) || (k > 2147483648 && n == -1))
-		ft_exit(a);
+	if (k > 2147483647 && n == 1)
+		return (3147483647);
+	if (k > 2147483648 && n == -1)
+		return (-3147483647);
 	return (k);
 }
 
-int	ft_atoi(const char *str, t_stack **a)
+long	ft_atoi(const char *str)
 {
 	size_t	i;
 	size_t	x;
-	size_t	j;
 	int		n;
 
 	x = 0;
@@ -54,17 +44,10 @@ int	ft_atoi(const char *str, t_stack **a)
 		i++;
 		x++;
 	}
-	j = i;
-	while (str[j])
-	{
-		if (str[j] < '0' || str[j] > '9')
-			ft_exit(a);
-		j++;
-	}
 	while (str[i] == '0' && str[i])
 	{
 		i++;
 		x++;
 	}
-	return (n * result(str, i, x, n, a));
+	return (n * result(str, i, n));
 }

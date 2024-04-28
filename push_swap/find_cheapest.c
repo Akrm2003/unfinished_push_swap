@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cheapest.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisalah <louisalah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 23:35:08 by louisalah         #+#    #+#             */
-/*   Updated: 2024/03/22 08:31:04 by louisalah        ###   ########.fr       */
+/*   Updated: 2024/03/28 06:32:27 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ t_cheap number_of_moves(int index_a, int index_b, int size_a, int size_b)
 	return (num);
 }
 
-t_cheap cheapest(t_stack *a, t_stack *b)
+t_cheap cheapest(t_stack *a, t_stack *b, int big_three)
 {
 	t_cheap	num;
+	int		wa;
 	int		n;
 	int		b_index;
 	int		a_size;
@@ -74,23 +75,37 @@ t_cheap cheapest(t_stack *a, t_stack *b)
 
     a_size = ft_lstsize(a);
 	b_size = ft_lstsize(b);
-	n = find_right_index_after(a, b);
-	b_index = find_index_for_right_index(b, n);
-	num = number_of_moves(a->index, b_index, a_size, b_size);
-	num.a_ind = a->index;
-	num.b_ind = b_index;
-	a = a->next;
-	while (a)
+	if (a->right_index >= (big_three - 3))
+		num.moves = 2147483647;
+	// (void) big_three;
+	// while (a && a->right_index >= (big_three - 3))
+	// 	a = a->next;
+	else
 	{
 		n = find_right_index_after(a, b);
 		b_index = find_index_for_right_index(b, n);
-		if (num.moves > number_of_moves(a->index, b_index, a_size, b_size).moves)
+		num = number_of_moves(a->index, b_index, a_size, b_size);
+		// wa = num.moves;
+		num.a_ind = a->index;
+		num.b_ind = b_index;
+	}
+	a = a->next;
+	while (a)
+	{
+		if (a->right_index >= (big_three - 3))
+			wa = 2147483647;
+		else
+		{
+			n = find_right_index_after(a, b);
+			b_index = find_index_for_right_index(b, n);
+			wa = number_of_moves(a->index, b_index, a_size, b_size).moves;
+		}
+		if (num.moves > wa)
 		{
 			num = number_of_moves(a->index, b_index, a_size, b_size);
 			num.a_ind = a->index;
 			num.b_ind = b_index;
 		}
-		// printf("num of moves for a[%d] = %d\n", a->index, num.moves);
 		a = a->next;
 	}
 	return (num);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisalah <louisalah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: asid-ahm <asid-ahm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 20:49:07 by louisalah         #+#    #+#             */
-/*   Updated: 2024/03/16 04:00:41 by louisalah        ###   ########.fr       */
+/*   Updated: 2024/04/28 10:50:56 by asid-ahm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,4 @@ void small_sort(t_stack **a)
         only_two(a);
     if (ft_lstsize(*a) == 3 && !is_sorted (*a))
         only_three(a);
-    // free (*a);
-    // free (*b);
 }
